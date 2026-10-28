@@ -2,7 +2,7 @@ import { Attachment, Bubble, Thread, VisitorReply } from '../components/chat'
 
 const roles = [
   { icon: '📱', title: 'Indie app builder', note: '2 apps live on the Play Store' },
-  { icon: '🎨', title: 'Designer', note: 'Graphic design intern at Palmonas' },
+  { icon: '🎨', title: 'Designer', note: "Worked 2 months as a graphic design intern with Palmonas' social media team" },
   { icon: '🎬', title: 'Video maker', note: 'That reel up there ☝️' },
 ]
 
