@@ -7,6 +7,8 @@ type Props = {
   caption?: ReactNode
   /** Drop the card chrome (e.g. a phone mockup brings its own frame). */
   bare?: boolean
+  /** Visible from first paint, no typing (read by <Thread>). */
+  instant?: boolean
   className?: string
 }
 

@@ -21,6 +21,8 @@ export function leftCorners(first: boolean) {
 type Props = {
   children: ReactNode
   variant?: Variant
+  /** Visible from first paint, no typing (read by <Thread>). */
+  instant?: boolean
   className?: string
 }
 

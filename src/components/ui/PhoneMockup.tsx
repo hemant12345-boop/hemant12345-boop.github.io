@@ -5,6 +5,8 @@ type Props = {
   /** Rows above / below the 9:16 content area (status bar, app chrome). */
   top?: ReactNode
   bottom?: ReactNode
+  /** Content fills the whole screen (a full phone screenshot) instead of the 9:16 slot. */
+  fullScreen?: boolean
   className?: string
 }
 
@@ -13,7 +15,7 @@ type Props = {
  * The content slot is exactly 9:16, so reels and screenshots are never cropped;
  * the leftover height is app chrome (top/bottom), like the real Reels UI.
  */
-export function PhoneMockup({ children, top, bottom, className = '' }: Props) {
+export function PhoneMockup({ children, top, bottom, fullScreen = false, className = '' }: Props) {
   return (
     <div className={`relative mx-auto w-full max-w-[18.5rem] ${className}`}>
       {/* side buttons */}
@@ -25,10 +27,16 @@ export function PhoneMockup({ children, top, bottom, className = '' }: Props) {
         <div className="relative flex aspect-[9/19.5] flex-col overflow-hidden rounded-[2.45rem] bg-black">
           {/* dynamic island */}
           <span aria-hidden className="absolute top-2.5 left-1/2 z-20 h-[22px] w-[30%] -translate-x-1/2 rounded-full bg-black" />
-          {/* Leftover height split 2:3 — status bar up top, more room for app chrome below. */}
-          <div className="relative flex flex-[2] flex-col justify-end">{top}</div>
-          <div className="relative aspect-[9/16] w-full shrink-0">{children}</div>
-          <div className="relative flex flex-[3] flex-col justify-center">{bottom}</div>
+          {fullScreen ? (
+            <div className="absolute inset-0">{children}</div>
+          ) : (
+            <>
+              {/* Leftover height split 2:3 — status bar up top, more room for app chrome below. */}
+              <div className="relative flex flex-[2] flex-col justify-end">{top}</div>
+              <div className="relative aspect-[9/16] w-full shrink-0">{children}</div>
+              <div className="relative flex flex-[3] flex-col justify-center">{bottom}</div>
+            </>
+          )}
         </div>
       </div>
     </div>

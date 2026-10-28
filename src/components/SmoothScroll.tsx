@@ -14,6 +14,13 @@ export function scrollToTarget(target: string | HTMLElement) {
   el?.scrollIntoView({ block: 'start' })
 }
 
+/** Freeze page scrolling (lightbox open) and restore it. */
+export function setScrollLocked(locked: boolean) {
+  if (locked) instance?.stop()
+  else instance?.start()
+  document.documentElement.style.overflow = locked ? 'hidden' : ''
+}
+
 /**
  * Lenis smooth scroll for wheel/trackpad. Touch devices keep native scrolling
  * (Lenis default), which is what feels right coming in from Instagram.

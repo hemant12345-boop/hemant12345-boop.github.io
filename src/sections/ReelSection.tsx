@@ -26,7 +26,8 @@ export function ReelSection() {
           I made this for <b className="font-bold text-gold">Wingy</b> 👀
         </Bubble>
 
-        <Attachment bare>
+        {/* The reel is the point of the page: on screen from the first paint, autoplaying when visible. */}
+        <Attachment bare instant className="animate-rise">
           <Tilt className="py-2">
             <PhoneMockup top={<StatusBar />} bottom={<ReelBottomBar />}>
               <ReelPlayer />

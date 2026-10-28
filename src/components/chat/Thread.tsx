@@ -26,20 +26,24 @@ const bubbleVariants: Variants = {
   shown: { opacity: 1, scale: 1, y: 0, transition: spring.pop },
 }
 
-/** Big things (phone mockups, cards) settle in instead of popping from 60%. */
+/** Big things (phone mockups, cards) slide in from my side and settle, instead of popping from 60%. */
 const settleVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.9, y: 28 },
-  shown: { opacity: 1, scale: 1, y: 0, transition: spring.settle },
+  hidden: { opacity: 0, scale: 0.94, x: -28, y: 16 },
+  shown: { opacity: 1, scale: 1, x: 0, y: 0, transition: spring.settle },
 }
 
 /** Components can opt into the settle reveal with a static `reveal = 'settle'`. */
 const revealOf = (child: ReactNode) =>
   isValidElement(child) && (child.type as { reveal?: string }).reveal === 'settle' ? settleVariants : bubbleVariants
 
+/**
+ * A message with `instant` is on screen from the first paint and skips the typing
+ * sequence (hero headline, the reel phone): good for LCP, and the reel never waits.
+ */
+const isInstant = (child: ReactNode) => isValidElement(child) && (child.props as { instant?: boolean }).instant === true
+
 type Props = {
   children: ReactNode
-  /** Show the first N messages straight away, no typing (the hero headline, for a fast LCP). */
-  instant?: number
   className?: string
 }
 
@@ -52,25 +56,27 @@ type Props = {
  * reserved: nothing below jumps when messages land (zero CLS), and the
  * text is in the DOM for crawlers and screen readers.
  */
-export function Thread({ children, instant = 0, className = '' }: Props) {
+export function Thread({ children, className = '' }: Props) {
   const items = Children.toArray(children)
+  // Indexes of the messages that play the typing sequence, in order.
+  const queue = items.flatMap((child, i) => (isInstant(child) ? [] : [i]))
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: chat.viewMargin })
   const [myTurn, finishTurn] = useTurn(inView)
   const reduce = useReducedMotion()
   const avatarId = useId()
 
-  const [shown, setShown] = useState(instant)
+  const [shown, setShown] = useState(0) // how many of `queue` have landed
   const [typing, setTyping] = useState(false)
 
   useEffect(() => {
     if (!myTurn) return
-    if (shown >= items.length) {
+    if (shown >= queue.length) {
       finishTurn()
       return
     }
     if (reduce) {
-      setShown(items.length)
+      setShown(queue.length)
       return
     }
     let typingTimer: number | undefined
@@ -88,7 +94,7 @@ export function Thread({ children, instant = 0, className = '' }: Props) {
       window.clearTimeout(startTimer)
       window.clearTimeout(typingTimer)
     }
-  }, [myTurn, shown, items.length, reduce, finishTurn])
+  }, [myTurn, shown, queue.length, reduce, finishTurn])
 
   // Tell the header I'm typing.
   useEffect(() => {
@@ -98,12 +104,14 @@ export function Thread({ children, instant = 0, className = '' }: Props) {
   }, [typing])
 
   // The avatar rides next to whichever slot is active: the one being typed, else the latest bubble.
-  const activeIndex = typing ? shown : shown - 1
+  const activeIndex = typing ? queue[shown] : (queue[shown - 1] ?? -1)
 
   return (
     <div ref={ref} role="group" aria-label="Hemant" className={`flex flex-col gap-1 ${className}`}>
       {items.map((child, i) => {
-        const status = i < shown ? 'shown' : typing && i === shown ? 'typing' : 'hidden'
+        const pos = queue.indexOf(i)
+        const status =
+          pos === -1 || pos < shown ? 'shown' : typing && pos === shown ? 'typing' : 'hidden'
         return (
           <div key={i} className="grid grid-cols-[28px_minmax(0,1fr)] items-end gap-2">
             <div className="h-7">

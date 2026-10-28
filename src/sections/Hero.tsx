@@ -4,8 +4,8 @@ export function Hero() {
   return (
     <section aria-label="Intro">
       {/* Headline is shown instantly (transform-only rise) so it can be the LCP; the rest types in. */}
-      <Thread instant={1}>
-        <Bubble variant="display" className="animate-rise">
+      <Thread>
+        <Bubble instant variant="display" className="animate-rise">
           <h1>
             Hey, I'm{' '}
             <span className="whitespace-nowrap">
