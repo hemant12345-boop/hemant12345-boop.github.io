@@ -20,8 +20,8 @@ Raw sources live in `assets-src/` (git-ignored: originals and the unblurred DM n
 
 1. Push this repo to GitHub (branch `main`).
 2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Every push to `main` runs `.github/workflows/deploy.yml`: it builds with the right base path
-   (`/<repo>/`, or `/` for a `<user>.github.io` repo) and the absolute site URL for link previews.
+3. Every push to `main` runs `.github/workflows/deploy.yml`: it builds the site at base `/`
+   (user site: https://hemant12345-boop.github.io) with the absolute site URL for link previews.
 
 Custom domain: set it in Settings → Pages; the workflow picks up the new URL automatically.
 
@@ -32,4 +32,4 @@ npm run build    # typecheck, client build, server build, prerender into dist/in
 npm run preview
 ```
 
-For a project-site path, set `BASE_PATH=/<repo>/`; set `SITE_URL` to get absolute `og:image` URLs.
+Set `SITE_URL` to get absolute `og:image` URLs (the workflow does this).

@@ -27,7 +27,7 @@ jobs:
           node-version: 24
           cache: npm
 
-      # Gives the Pages URL and base path (/<repo> for a project site, empty for <user>.github.io).
+      # Gives the site URL (https://hemant12345-boop.github.io) for og:image / canonical.
       - id: pages
         uses: actions/configure-pages@v5
 
@@ -35,7 +35,6 @@ jobs:
 
       - run: npm run build
         env:
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
           SITE_URL: ${{ steps.pages.outputs.base_url }}
 
       - uses: actions/upload-pages-artifact@v3

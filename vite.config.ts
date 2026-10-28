@@ -3,12 +3,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 /**
- * GitHub Pages: a project site lives under /<repo>/, a user site (<user>.github.io) at /.
- * The deploy workflow sets both from actions/configure-pages; locally they default to / and empty.
+ * Absolute site URL for canonical + og:image (link previews need absolute URLs).
+ * The Pages workflow sets it from actions/configure-pages; locally it's empty.
  */
-const base = process.env.BASE_PATH || '/'
-
-/** Absolute site URL (incl. base path) for canonical + og:image — link previews need absolute URLs. */
 const siteUrl = (process.env.SITE_URL ?? '').replace(/\/$/, '')
 
 function siteUrlPlugin(): Plugin {
@@ -24,6 +21,7 @@ function siteUrlPlugin(): Plugin {
 }
 
 export default defineConfig({
-  base,
+  // User site (hemant12345-boop.github.io) is served from the domain root.
+  base: '/',
   plugins: [react(), tailwindcss(), siteUrlPlugin()],
 })
