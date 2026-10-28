@@ -28,7 +28,7 @@ export function DmStory() {
           jewelry.
         </Bubble>
         <Bubble>He replied "Nice work"…</Bubble>
-        <Bubble variant="lilac">…and I became their Graphic Design Intern 💍</Bubble>
+        <Bubble variant="lilac">…and spent 2 months as their Graphic Design Intern on the social media team 💍</Bubble>
       </Thread>
     </section>
   )
