@@ -60,16 +60,12 @@ const posesnap = await shots(`${SRC}/posesnap`, 'posesnap')
 // Lead with "Block apps, manifest first": it's the whole idea of the app.
 const manifest = await shots(`${SRC}/manifest`, 'manifest', [2, 0, 1])
 
-// ── Palmonas gallery: accept assets-src/palmonas or public/assets/palmonas ────
-const palmonasFiles = [...(await listImages(`${SRC}/palmonas`)), ...(await listImages('public/assets/palmonas'))]
-const palmonas = await Promise.all(palmonasFiles.map((f, i) => responsive(f, `palmonas-${i + 1}`, 480, 1440)))
-
 await writeFile(
   MANIFEST,
   JSON.stringify(
-    { zero1, marksheet: { src: '/media/marksheet-ai-720.webp', w: marksheet.width, h: marksheet.height }, posesnap, manifest, palmonas },
+    { zero1, marksheet: { src: '/media/marksheet-ai-720.webp', w: marksheet.width, h: marksheet.height }, posesnap, manifest },
     null,
     2,
   ) + '\n',
 )
-console.log(`done — palmonas: ${palmonas.length}, posesnap: ${posesnap.length}, manifest: ${manifest.length}`)
+console.log(`done — posesnap: ${posesnap.length}, manifest: ${manifest.length}`)

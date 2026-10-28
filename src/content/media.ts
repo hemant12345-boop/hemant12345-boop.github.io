@@ -26,5 +26,3 @@ const manifestAlts = [
   'Subconscious Unlock: easy setup, works on all Android devices',
 ]
 export const manifestShots = withAlt(generated.manifest, (i) => manifestAlts[i] ?? `Subconscious Unlock screenshot ${i + 1}`)
-
-export const palmonasDesigns = withAlt(generated.palmonas as Img[], (i) => `Jewelry design for Palmonas, ${i + 1}`)

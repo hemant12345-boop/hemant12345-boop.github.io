@@ -1,10 +1,8 @@
 import { m } from 'framer-motion'
 import { Attachment, Bubble, Thread, VisitorReply } from '../components/chat'
 import { useSlot } from '../components/chat/Thread'
-import { Gallery } from '../components/ui/Gallery'
 import { Parallax } from '../components/ui/Parallax'
 import { PhoneMockup } from '../components/ui/PhoneMockup'
-import { palmonasDesigns } from '../content/media'
 
 export function DmStory() {
   return (
@@ -29,12 +27,6 @@ export function DmStory() {
         </Bubble>
         <Bubble>He replied "Nice work"…</Bubble>
         <Bubble variant="lilac">…and I became their Graphic Design Intern 💍</Bubble>
-
-        {palmonasDesigns.length > 0 && (
-          <Attachment caption={<span className="text-muted">Some of my Palmonas work · tap to open</span>}>
-            <Gallery images={palmonasDesigns} label="Palmonas designs" />
-          </Attachment>
-        )}
       </Thread>
     </section>
   )
