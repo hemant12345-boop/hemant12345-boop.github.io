@@ -9,6 +9,7 @@ export function OutInTheWorld() {
 
   return (
     <section aria-label="Out in the world" className="flex flex-col gap-6">
+      <h2 className="sr-only">Out in the world</h2>
       <VisitorReply>and when you're not at your laptop?</VisitorReply>
       <Thread>
         <Attachment>
@@ -17,6 +18,8 @@ export function OutInTheWorld() {
             <button type="button" onClick={() => setOpen(0)} aria-label="Open the Zero1 photo" className="block w-full">
               <img
                 src={zero1.thumb}
+                srcSet={zero1.srcset}
+                sizes="(max-width: 420px) 82vw, 352px"
                 alt={zero1.alt}
                 width={zero1.w}
                 height={zero1.h}
@@ -28,7 +31,9 @@ export function OutInTheWorld() {
           </Parallax>
         </Attachment>
         <Bubble>
-          Me next to a billionaire at Zero1. Combined net worth in this photo: billions. My contribution: ₹0 🙂
+          Me next to a billionaire at Zero1. Combined net worth in this photo: billions. My contribution:{' '}
+          {/* ₹ is the only latin-ext glyph on the page; system font saves an 85 KB Inter download. */}
+          <span className="font-[system-ui]">₹</span>0 🙂
         </Bubble>
       </Thread>
       <VisitorReply seen>😂 fair</VisitorReply>

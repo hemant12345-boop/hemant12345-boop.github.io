@@ -1,5 +1,6 @@
-/** Every outbound link in one place. */
+import { asset } from './asset'
 
+/** Every outbound link in one place. */
 export const INSTAGRAM_PROFILE = 'https://www.instagram.com/i.m.hemant_mahato/'
 
 // TODO: paste the Wingy reel's Instagram URL. Until then the button opens my profile.
@@ -16,6 +17,6 @@ export const POSESNAP_PLAY = 'https://play.google.com/store/apps/details?id=com.
 export const SUBCONSCIOUS_PLAY = 'https://play.google.com/store/apps/details?id=com.hemant.subconsciousunlock'
 
 export const media = {
-  reel: '/media/wingy-reel-720.mp4',
-  reelPoster: '/media/reel-poster.webp',
+  reel: asset('/media/wingy-reel-720.mp4'),
+  reelPoster: asset('/media/reel-poster.webp'),
 } as const

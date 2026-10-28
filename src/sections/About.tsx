@@ -9,6 +9,7 @@ const roles = [
 export function About() {
   return (
     <section aria-label="About me" className="flex flex-col gap-6">
+      <h2 className="sr-only">About me</h2>
       <VisitorReply seen>ok who are you?</VisitorReply>
       <Thread>
         <Bubble>

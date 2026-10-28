@@ -28,7 +28,7 @@ export function VisitorReply({ children, seen = false, className = '' }: Props) 
         // Framer also fires this on mount (settling `initial`), so only count the real pop.
         onAnimationComplete={() => myTurn && finishTurn()}
         style={{ originX: 1, originY: 1 }}
-        className="w-fit max-w-[80%] rounded-bubble rounded-br-tail bg-sent px-4 py-2.5 text-bubble font-medium text-white shadow-sent"
+        className="chat-slot w-fit max-w-[80%] rounded-bubble rounded-br-tail bg-sent px-4 py-2.5 text-bubble font-medium text-white shadow-sent"
       >
         <span className="sr-only">You: </span>
         {children}
@@ -38,7 +38,7 @@ export function VisitorReply({ children, seen = false, className = '' }: Props) 
           initial={{ opacity: 0 }}
           animate={myTurn ? { opacity: 1 } : undefined}
           transition={{ delay: (chat.replyDelay + chat.seenDelay) / 1000, duration: 0.3 }}
-          className="pr-1 text-xs text-faint"
+          className="pr-1 text-xs text-muted"
         >
           Seen
         </m.span>

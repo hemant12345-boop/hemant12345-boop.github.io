@@ -25,4 +25,5 @@ const subscribe = (l: () => void) => {
   return () => listeners.delete(l)
 }
 
-export const useIsTyping = () => useSyncExternalStore(subscribe, () => active > 0)
+export const useIsTyping = () =>
+  useSyncExternalStore(subscribe, () => active > 0, () => false) // nobody types during prerender

@@ -15,13 +15,27 @@ const IMG = /\.(jpe?g|png|webp|avif)$/i
 const listImages = async (dir) =>
   existsSync(dir) ? (await readdir(dir)).filter((f) => IMG.test(f)).sort().map((f) => path.join(dir, f)) : []
 
-/** Write a small + large webp of one image; never crops (fit: inside). */
-async function responsive(src, name, smallW, largeW) {
-  const small = await sharp(src).resize({ width: smallW, withoutEnlargement: true }).webp({ quality: 78 })
-    .toFile(`${OUT}/${name}-${smallW}.webp`)
+/**
+ * In-page widths (for srcset) + one large copy for the lightbox. Never crops (fit: inside).
+ * `thumb` is the largest in-page width, the src fallback.
+ */
+async function responsive(src, name, widths, largeW) {
+  const sizes = []
+  for (const w of widths) {
+    const info = await sharp(src).resize({ width: w, withoutEnlargement: true }).webp({ quality: 78 })
+      .toFile(`${OUT}/${name}-${w}.webp`)
+    sizes.push({ url: `/media/${name}-${w}.webp`, info })
+  }
   await sharp(src).resize({ width: largeW, height: largeW, fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 82 }).toFile(`${OUT}/${name}-${largeW}.webp`)
-  return { thumb: `/media/${name}-${smallW}.webp`, full: `/media/${name}-${largeW}.webp`, w: small.width, h: small.height }
+  const base = sizes.at(-1)
+  return {
+    thumb: base.url,
+    srcset: sizes.map((x) => `${x.url} ${x.info.width}w`).join(', '),
+    full: `/media/${name}-${largeW}.webp`,
+    w: base.info.width,
+    h: base.info.height,
+  }
 }
 
 // ── DM screenshot: destroy the phone number only (Drive link stays readable) ──
@@ -33,10 +47,12 @@ async function responsive(src, name, smallW, largeW) {
     .resize(box.width, box.height, { kernel: 'cubic' }).blur(6).toBuffer()
   const blurred = sharp(src).composite([{ input: patch, left: box.left, top: box.top }])
   await blurred.clone().webp({ quality: 86 }).toFile(`${OUT}/dm-palmonas.webp`)
+  // Shown ~250 css px wide: 480w covers up to ~2x screens, the 702w original covers 3x.
+  await blurred.clone().resize(480).webp({ quality: 84 }).toFile(`${OUT}/dm-palmonas-480.webp`)
 }
 
 // ── Zero1 photo: full frame, never cropped ───────────────────────────────────
-const zero1 = await responsive(`${SRC}/zero1-photo.jpeg`, 'zero1-photo', 720, 1080)
+const zero1 = await responsive(`${SRC}/zero1-photo.jpeg`, 'zero1-photo', [480, 720], 1080)
 
 // ── Reel poster (preloaded, so keep it small) + OG image ─────────────────────
 {
@@ -48,13 +64,12 @@ const zero1 = await responsive(`${SRC}/zero1-photo.jpeg`, 'zero1-photo', 720, 10
 }
 
 // ── Projects ─────────────────────────────────────────────────────────────────
-const marksheet = await sharp(`${SRC}/downloads/marksheet-yt.jpg`).resize(720).webp({ quality: 78 })
-  .toFile(`${OUT}/marksheet-ai-720.webp`)
+const marksheet = await responsive(`${SRC}/downloads/marksheet-yt.jpg`, 'marksheet-ai', [480, 720], 720) // in-page only, no lightbox copy
 
 const shots = async (dir, name, order) => {
   const files = await listImages(dir)
   const sorted = order ? order.map((i) => files[i]).filter(Boolean) : files
-  return Promise.all(sorted.map((f, i) => responsive(f, `${name}-${i + 1}`, 300, 1080)))
+  return Promise.all(sorted.map((f, i) => responsive(f, `${name}-${i + 1}`, [220, 300], 1080)))
 }
 const posesnap = await shots(`${SRC}/posesnap`, 'posesnap')
 // Lead with "Block apps, manifest first": it's the whole idea of the app.
@@ -63,7 +78,7 @@ const manifest = await shots(`${SRC}/manifest`, 'manifest', [2, 0, 1])
 await writeFile(
   MANIFEST,
   JSON.stringify(
-    { zero1, marksheet: { src: '/media/marksheet-ai-720.webp', w: marksheet.width, h: marksheet.height }, posesnap, manifest },
+    { zero1, marksheet, posesnap, manifest },
     null,
     2,
   ) + '\n',

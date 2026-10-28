@@ -8,7 +8,9 @@ export function Contact() {
   return (
     <section id="contact" aria-label="Contact" className="flex scroll-mt-24 flex-col gap-6">
       <Thread>
-        <Bubble className="text-title font-display font-extrabold tracking-tightest">So… should we talk? 😄</Bubble>
+        <Bubble className="text-title font-display font-extrabold tracking-tightest">
+          <h2>So… should we talk? 😄</h2>
+        </Bubble>
         <Attachment>
           <div className="flex flex-col gap-2.5 p-4">
             <Button href={INSTAGRAM_PROFILE} size="lg" className="w-full" icon={<InstagramIcon />}>
@@ -29,7 +31,7 @@ export function Contact() {
         </Attachment>
       </Thread>
 
-      <footer className="pt-10 text-center text-sm text-faint">Built by me, with Claude Code.</footer>
+      <footer className="pt-10 text-center text-sm text-muted">Built by me, with Claude Code.</footer>
     </section>
   )
 }

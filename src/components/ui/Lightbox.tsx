@@ -4,7 +4,7 @@ import { AnimatePresence, m } from 'framer-motion'
 import { setScrollLocked } from '../SmoothScroll'
 import { ease } from '../../design/motion'
 
-export type LightboxImage = { full: string; thumb: string; w: number; h: number; alt: string }
+export type LightboxImage = { full: string; thumb: string; srcset?: string; w: number; h: number; alt: string }
 
 type Props = {
   images: LightboxImage[]
@@ -23,6 +23,9 @@ export function Lightbox({ images, index, onIndex }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null)
   const openerRef = useRef<HTMLElement | null>(null)
   const [dir, setDir] = useState(0)
+  // document.body doesn't exist during the build-time prerender; portal only once mounted.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   const go = useCallback(
     (step: number) => {
@@ -53,6 +56,7 @@ export function Lightbox({ images, index, onIndex }: Props) {
 
   const img = index !== null ? images[index] : null
 
+  if (!mounted) return null
   return createPortal(
     <AnimatePresence>
       {img && (

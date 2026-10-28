@@ -31,7 +31,7 @@ function isMyTurn(ticket: number) {
 /** Returns [mayPlay, finish]. Call finish() when this turn's animation is over. */
 export function useTurn(inView: boolean): [boolean, () => void] {
   const [ticket] = useState(() => nextTicket++)
-  useSyncExternalStore(subscribe, () => version)
+  useSyncExternalStore(subscribe, () => version, () => 0)
 
   useEffect(() => {
     states.set(ticket, states.get(ticket) ?? 'idle')

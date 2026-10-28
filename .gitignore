@@ -1,7 +1,7 @@
 node_modules
 dist
 *.local
-.vercel
 
 # Raw source images (unblurred DM etc.) — never deploy or commit
 assets-src/
+dist-server

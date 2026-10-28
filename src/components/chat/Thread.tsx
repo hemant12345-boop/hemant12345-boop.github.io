@@ -128,6 +128,7 @@ export function Thread({ children, className = '' }: Props) {
                 animate={status === 'shown' ? 'shown' : 'hidden'}
                 variants={revealOf(child)}
                 style={{ originX: 0, originY: 1 }}
+                className="chat-slot" // index.html's <noscript> shows these without JS
               >
                 <SlotContext.Provider value={{ first: i === 0, last: i === items.length - 1, shown: status === 'shown' }}>
                   {child}

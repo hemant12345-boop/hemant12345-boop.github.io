@@ -5,14 +5,20 @@ import { Gallery } from '../components/ui/Gallery'
 import { MARKSHEET_AI_VIDEO, POSESNAP_PLAY, SUBCONSCIOUS_PLAY } from '../content/links'
 import { manifestShots, marksheetThumb, posesnapShots } from '../content/media'
 
+/** Screenshot tiles are 38% of a card that's at most 22rem: ~130px, less on small phones. */
+const SHOT_SIZES = '(max-width: 420px) 30vw, 130px'
+/** Full-width media in a card (max 22rem). */
+const CARD_SIZES = '(max-width: 420px) 82vw, 352px'
+
 export function Projects() {
   return (
     <section aria-label="Things I've built" className="flex flex-col gap-6">
+      <h2 className="sr-only">Things I've built</h2>
       <VisitorReply seen>show me the projects 👀</VisitorReply>
       <Thread>
         <Bubble>Things I've built 🛠️</Bubble>
 
-        <Attachment>
+        <Attachment tilt>
           <YouTubeLite id="ivkFEzrzL7g" title="Marksheet AI demo" />
           <ProjectInfo
             name="Marksheet AI"
@@ -26,8 +32,8 @@ export function Projects() {
           />
         </Attachment>
 
-        <Attachment>
-          <Gallery images={posesnapShots} label="PoseSnap screenshots" itemClassName="w-[38%]" className="pb-0" />
+        <Attachment tilt>
+          <Gallery images={posesnapShots} label="PoseSnap screenshots" itemClassName="w-[38%]" sizes={SHOT_SIZES} className="pb-0" />
           <ProjectInfo
             name="PoseSnap"
             tag="Android · Camera"
@@ -36,8 +42,8 @@ export function Projects() {
           />
         </Attachment>
 
-        <Attachment>
-          <Gallery images={manifestShots} label="Subconscious Unlock screenshots" itemClassName="w-[38%]" className="pb-0" />
+        <Attachment tilt>
+          <Gallery images={manifestShots} label="Subconscious Unlock screenshots" itemClassName="w-[38%]" sizes={SHOT_SIZES} className="pb-0" />
           <ProjectInfo
             name="Subconscious Unlock"
             tag="Android · Wellbeing"
@@ -95,7 +101,9 @@ function YouTubeLite({ id, title }: { id: string; title: string }) {
       ) : (
         <button type="button" onClick={() => setPlaying(true)} aria-label={`Play: ${title}`} className="group absolute inset-0">
           <img
-            src={marksheetThumb.src}
+            src={marksheetThumb.thumb}
+            srcSet={marksheetThumb.srcset}
+            sizes={CARD_SIZES}
             alt=""
             width={marksheetThumb.w}
             height={marksheetThumb.h}

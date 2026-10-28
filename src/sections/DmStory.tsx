@@ -3,10 +3,12 @@ import { Attachment, Bubble, Thread, VisitorReply } from '../components/chat'
 import { useSlot } from '../components/chat/Thread'
 import { Parallax } from '../components/ui/Parallax'
 import { PhoneMockup } from '../components/ui/PhoneMockup'
+import { asset, assetSrcset } from '../content/asset'
 
 export function DmStory() {
   return (
     <section aria-label="How one DM got me an internship" className="flex flex-col gap-6">
+      <h2 className="sr-only">How one DM got me an internship</h2>
       <VisitorReply>does this stuff actually work on people? 😏</VisitorReply>
       <Thread>
         <Bubble>
@@ -38,7 +40,9 @@ function DmScreenshot() {
   return (
     <div className="relative w-full">
       <img
-        src="/media/dm-palmonas.webp"
+        src={asset('/media/dm-palmonas.webp')}
+        srcSet={assetSrcset('/media/dm-palmonas-480.webp 480w, /media/dm-palmonas.webp 702w')}
+        sizes="250px"
         alt="My Instagram DM to Amol Patwari with Palmonas designs, and his reply: Nice work"
         width={702}
         height={1600}

@@ -15,6 +15,7 @@ export function ReelSection() {
 
   return (
     <section ref={ref} id="reel" aria-label="The Wingy reel" className="relative">
+      <h2 className="sr-only">The Wingy reel</h2>
       {/* Parallax glow behind the phone (gradient, not filter blur: cheap to paint). */}
       <m.div
         aria-hidden

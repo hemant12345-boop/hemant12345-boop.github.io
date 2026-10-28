@@ -6,11 +6,13 @@ type Props = {
   label: string
   /** Width of each tile; anything under 100% leaves a peek of the next one to invite a swipe. */
   itemClassName?: string
+  /** `sizes` for the thumbnails' srcset: the tile's rendered width. */
+  sizes?: string
   className?: string
 }
 
 /** Horizontal swipe strip (scroll-snap) of thumbnails; tap one to open the lightbox. */
-export function Gallery({ images, label, itemClassName = 'w-[62%]', className = '' }: Props) {
+export function Gallery({ images, label, itemClassName = 'w-[62%]', sizes, className = '' }: Props) {
   const [index, setIndex] = useState<number | null>(null)
 
   return (
@@ -29,6 +31,8 @@ export function Gallery({ images, label, itemClassName = 'w-[62%]', className = 
             >
               <img
                 src={img.thumb}
+                srcSet={img.srcset}
+                sizes={sizes}
                 alt={img.alt}
                 width={img.w}
                 height={img.h}

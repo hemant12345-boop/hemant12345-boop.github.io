@@ -109,7 +109,7 @@ export function ReelPlayer() {
             className="absolute bottom-6 left-1/2 flex h-12 -translate-x-1/2 items-center gap-2 rounded-full bg-white px-5 text-[15px] font-bold tracking-tighter whitespace-nowrap text-plum-800 shadow-[0_10px_30px_-6px_rgb(0_0_0/0.6)] active:scale-[0.97]"
           >
             <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-white/50 motion-reduce:hidden [animation-duration:2s]" />
-            {reduce ? '▶ play with sound' : 'tap for sound 🔊'}
+            tap for sound 🔊
           </m.button>
         )}
       </AnimatePresence>
