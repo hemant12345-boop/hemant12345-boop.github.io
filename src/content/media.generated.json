@@ -1,0 +1,54 @@
+{
+  "zero1": {
+    "thumb": "/media/zero1-photo-720.webp",
+    "full": "/media/zero1-photo-1080.webp",
+    "w": 720,
+    "h": 720
+  },
+  "marksheet": {
+    "src": "/media/marksheet-ai-720.webp",
+    "w": 720,
+    "h": 405
+  },
+  "posesnap": [
+    {
+      "thumb": "/media/posesnap-1-300.webp",
+      "full": "/media/posesnap-1-1080.webp",
+      "w": 300,
+      "h": 533
+    },
+    {
+      "thumb": "/media/posesnap-2-300.webp",
+      "full": "/media/posesnap-2-1080.webp",
+      "w": 300,
+      "h": 533
+    },
+    {
+      "thumb": "/media/posesnap-3-300.webp",
+      "full": "/media/posesnap-3-1080.webp",
+      "w": 300,
+      "h": 533
+    }
+  ],
+  "manifest": [
+    {
+      "thumb": "/media/manifest-1-300.webp",
+      "full": "/media/manifest-1-1080.webp",
+      "w": 300,
+      "h": 538
+    },
+    {
+      "thumb": "/media/manifest-2-300.webp",
+      "full": "/media/manifest-2-1080.webp",
+      "w": 300,
+      "h": 538
+    },
+    {
+      "thumb": "/media/manifest-3-300.webp",
+      "full": "/media/manifest-3-1080.webp",
+      "w": 300,
+      "h": 538
+    }
+  ],
+  "palmonas": []
+}

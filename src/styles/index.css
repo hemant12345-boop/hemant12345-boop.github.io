@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "lenis/dist/lenis.css";
+
+@layer base {
+  html,
+  body {
+    /* Decorative glows bleed past the column; clip (not hidden) keeps sticky working. */
+    overflow-x: clip;
+  }
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-plum-900 font-sans text-ink antialiased;
+    min-height: 100dvh;
+    font-feature-settings: "ss01", "cv11"; /* Inter: open digits, single-storey a */
+  }
+  /* Gradient backdrop on a fixed layer: background-attachment: fixed
+     repaints on every scroll on mobile, this composites once. */
+  body::before {
+    @apply bg-plum-page;
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  ::selection {
+    background: var(--color-pink);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
