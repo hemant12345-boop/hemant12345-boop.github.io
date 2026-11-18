@@ -3,7 +3,7 @@ import { asset } from './asset'
 /** Every outbound link in one place. */
 export const INSTAGRAM_PROFILE = 'https://www.instagram.com/i.m.hemant_mahato/'
 
-// TODO: paste the Wingy reel's Instagram URL. Until then the button opens my profile.
+// TODO: paste the reel's Instagram URL. Until then the button opens my profile.
 export const INSTAGRAM_REEL: string = 'TODO'
 export const instagramReelHref = INSTAGRAM_REEL === 'TODO' ? INSTAGRAM_PROFILE : INSTAGRAM_REEL
 

@@ -1,6 +1,7 @@
 import { Bubble, Thread } from '../components/chat'
+import type { Variant } from '../content/variant'
 
-export function Hero() {
+export function Hero({ variant }: { variant: Variant }) {
   return (
     <section aria-label="Intro">
       {/* Headline is shown instantly (transform-only rise) so it can be the LCP; the rest types in. */}
@@ -15,7 +16,11 @@ export function Hero() {
           </h1>
         </Bubble>
         <Bubble>4th-year engineering student from Jamshedpur.</Bubble>
-        <Bubble variant="lilac">I make things people stop scrolling for.</Bubble>
+        <Bubble variant="lilac">
+          {variant === 'wingy'
+            ? 'I make things people stop scrolling for.'
+            : 'I build apps, design, and make videos people stop scrolling for.'}
+        </Bubble>
       </Thread>
     </section>
   )

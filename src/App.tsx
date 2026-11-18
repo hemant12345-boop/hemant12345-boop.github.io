@@ -7,20 +7,21 @@ import { Hero } from './sections/Hero'
 import { OutInTheWorld } from './sections/OutInTheWorld'
 import { Projects } from './sections/Projects'
 import { ReelSection } from './sections/ReelSection'
+import type { Variant } from './content/variant'
 
-export default function App() {
+export default function App({ variant }: { variant: Variant }) {
   return (
     <>
       <ChatHeader />
       <main className="mx-auto flex max-w-chat flex-col gap-6 px-gutter pt-2 pb-16">
         <DayDivider>Today 9:41 AM</DayDivider>
-        <Hero />
-        <ReelSection />
-        <About />
+        <Hero variant={variant} />
+        <ReelSection variant={variant} />
+        <About variant={variant} />
         <DmStory />
         <Projects />
         <OutInTheWorld />
-        <Contact />
+        <Contact variant={variant} />
       </main>
       <ScrollHint />
     </>

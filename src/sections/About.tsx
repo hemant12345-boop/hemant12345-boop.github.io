@@ -1,4 +1,5 @@
 import { Attachment, Bubble, Thread, VisitorReply } from '../components/chat'
+import type { Variant } from '../content/variant'
 
 const roles = [
   { icon: '📱', title: 'Indie app builder', note: '2 apps live on the Play Store' },
@@ -6,7 +7,13 @@ const roles = [
   { icon: '🎬', title: 'Video maker', note: 'That reel up there ☝️' },
 ]
 
-export function About() {
+// The main page has no reel player to point at.
+const videoNote: Record<Variant, string> = {
+  main: 'Comedy reels, animated in code',
+  wingy: 'That reel up there ☝️',
+}
+
+export function About({ variant }: { variant: Variant }) {
   return (
     <section aria-label="About me" className="flex flex-col gap-6">
       <h2 className="sr-only">About me</h2>
@@ -26,7 +33,7 @@ export function About() {
                 </span>
                 <span className="leading-tight">
                   <span className="block font-semibold tracking-tighter">{r.title}</span>
-                  <span className="text-sm text-muted">{r.note}</span>
+                  <span className="text-sm text-muted">{r.title === 'Video maker' ? videoNote[variant] : r.note}</span>
                 </span>
               </li>
             ))}

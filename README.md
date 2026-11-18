@@ -1,7 +1,11 @@
-# Hemant — I made this for Wingy
+# Hemant Mahato — Apps, Design & Animation
 
 My portfolio as a chat conversation. Vite + React + TypeScript + Tailwind + Framer Motion + Lenis,
 prerendered to static HTML at build time and hosted on GitHub Pages.
+
+Two pages share the app (see `src/content/variant.ts`): the general portfolio at `/`, and the original
+Wingy application version at `/wingy/` (noindex, not linked from `/`). The main link-preview card is
+`public/media/og-home.jpg`, made by `node scripts/og-card.mjs`.
 
 ## Develop
 

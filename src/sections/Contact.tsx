@@ -1,15 +1,16 @@
 import { Attachment, Bubble, Thread } from '../components/chat'
 import { Button } from '../components/ui/Button'
 import { EMAIL, GITHUB, INSTAGRAM_PROFILE, LINKEDIN } from '../content/links'
+import type { Variant } from '../content/variant'
 
 const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent('Hey Hemant 👋')}`
 
-export function Contact() {
+export function Contact({ variant }: { variant: Variant }) {
   return (
     <section id="contact" aria-label="Contact" className="flex scroll-mt-24 flex-col gap-6">
       <Thread>
         <Bubble className="text-title font-display font-extrabold tracking-tightest">
-          <h2>So… should we talk? 😄</h2>
+          <h2>{variant === 'wingy' ? 'So… should we talk? 😄' : 'So… should we work together? 😄'}</h2>
         </Bubble>
         <Attachment>
           <div className="flex flex-col gap-2.5 p-4">

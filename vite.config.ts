@@ -24,4 +24,10 @@ export default defineConfig({
   // User site (hemant12345-boop.github.io) is served from the domain root.
   base: '/',
   plugins: [react(), tailwindcss(), siteUrlPlugin()],
+  build: {
+    // Two pages: the portfolio at / and the original Wingy application version at /wingy/.
+    rolldownOptions: {
+      input: { main: 'index.html', wingy: 'wingy/index.html' },
+    },
+  },
 })
