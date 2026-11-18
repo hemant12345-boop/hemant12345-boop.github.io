@@ -21,7 +21,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
   <rect width="100%" height="100%" fill="url(#bg)"/>
   <rect width="100%" height="100%" fill="url(#glow)"/>
   <text x="90" y="250" font-family="${font}" font-weight="800" font-size="104" letter-spacing="-4" fill="#FFFFFF">Hey, I'm <tspan fill="url(#name)">Hemant</tspan></text>
-  <text x="90" y="350" font-family="${font}" font-weight="700" font-size="50" letter-spacing="-1.5" fill="#E6C6E6">Apps, Design &amp; Animation</text>
+  <text x="90" y="350" font-family="${font}" font-weight="700" font-size="50" letter-spacing="-1.5" fill="#E6C6E6">Apps &amp; Design</text>
   <rect x="90" y="420" width="534" height="76" rx="38" fill="#FFFFFF" fill-opacity="0.1"/>
   <text x="124" y="469" font-family="${font}" font-weight="600" font-size="30" fill="#FFFFFF" fill-opacity="0.85">Engineering student · Jamshedpur</text>
 </svg>`

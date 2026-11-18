@@ -16,7 +16,7 @@ export default function App({ variant }: { variant: Variant }) {
       <main className="mx-auto flex max-w-chat flex-col gap-6 px-gutter pt-2 pb-16">
         <DayDivider>Today 9:41 AM</DayDivider>
         <Hero variant={variant} />
-        <ReelSection variant={variant} />
+        {variant === 'wingy' && <ReelSection />}
         <About variant={variant} />
         <DmStory />
         <Projects />

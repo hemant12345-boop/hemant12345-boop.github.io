@@ -19,7 +19,7 @@ export function Hero({ variant }: { variant: Variant }) {
         <Bubble variant="lilac">
           {variant === 'wingy'
             ? 'I make things people stop scrolling for.'
-            : 'I build apps, design, and make videos people stop scrolling for.'}
+            : 'I build apps and design things people stop scrolling for.'}
         </Bubble>
       </Thread>
     </section>

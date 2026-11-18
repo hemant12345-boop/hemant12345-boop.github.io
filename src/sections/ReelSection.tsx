@@ -7,42 +7,9 @@ import { Tilt } from '../components/ui/Tilt'
 import { ProcessStrip } from '../components/reel/ProcessStrip'
 import { ReelPlayer } from '../components/reel/ReelPlayer'
 import { instagramReelHref } from '../content/links'
-import type { Variant } from '../content/variant'
 
-export function ReelSection({ variant }: { variant: Variant }) {
-  return variant === 'wingy' ? <WingyReelSection /> : <FeaturedWork />
-}
-
-/**
- * Main page: the reel as a featured project, told in messages (no video on this page).
- * Credit stays: it's a fan-made spec ad and the mascot is Wingy's.
- */
-function FeaturedWork() {
-  return (
-    <section id="work" aria-label="Featured work">
-      <h2 className="sr-only">Featured work</h2>
-      <Thread>
-        <Bubble>I animated a comedy reel entirely in code 🎬</Bubble>
-        <Bubble>
-          Built with <b className="font-semibold text-pink">Remotion + Claude Code + ElevenLabs</b>.
-        </Bubble>
-        <Bubble>Story, voices, lip-sync rig, all built by me.</Bubble>
-
-        <Attachment>
-          <ProcessStrip />
-          <p className="px-4 pb-3 text-xs text-muted">Fan-made spec ad for Wingy</p>
-        </Attachment>
-
-        <Button href={instagramReelHref} variant="gold" icon={<InstagramIcon />}>
-          Watch on Instagram
-        </Button>
-      </Thread>
-    </section>
-  )
-}
-
-/** /wingy/: the original application version, unchanged. */
-function WingyReelSection() {
+/** The reel, as shown on /wingy/ (the original application version). The main page has no reel. */
+export function ReelSection() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const glowY = useTransform(scrollYProgress, [0, 1], [-60, 60])

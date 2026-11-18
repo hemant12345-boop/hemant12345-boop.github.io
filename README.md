@@ -1,4 +1,4 @@
-# Hemant Mahato — Apps, Design & Animation
+# Hemant Mahato — Apps & Design
 
 My portfolio as a chat conversation. Vite + React + TypeScript + Tailwind + Framer Motion + Lenis,
 prerendered to static HTML at build time and hosted on GitHub Pages.
