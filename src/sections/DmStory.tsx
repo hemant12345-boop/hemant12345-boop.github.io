@@ -2,8 +2,10 @@ import { m } from 'framer-motion'
 import { Attachment, Bubble, Thread, VisitorReply } from '../components/chat'
 import { useSlot } from '../components/chat/Thread'
 import { Parallax } from '../components/ui/Parallax'
+import { Button } from '../components/ui/Button'
 import { PhoneMockup } from '../components/ui/PhoneMockup'
 import { asset, assetSrcset } from '../content/asset'
+import { PALMONAS_INSTAGRAM } from '../content/links'
 
 export function DmStory() {
   return (
@@ -24,11 +26,22 @@ export function DmStory() {
         </Attachment>
 
         <Bubble>
-          I DM'd <b className="font-semibold">Amol Patwari</b>, founder of Palmonas, with designs inspired by their
-          jewelry.
+          I DM'd <b className="font-semibold">Amol Patwari</b>, founder of{' '}
+          <a
+            href={PALMONAS_INSTAGRAM}
+            target="_blank"
+            rel="noopener"
+            className="font-semibold text-gold underline decoration-gold/50 underline-offset-2 hover:decoration-gold"
+          >
+            Palmonas
+          </a>{' '}
+          — the jewelry brand co-founded by Shraddha Kapoor ✨ — with designs inspired by their jewelry.
         </Bubble>
         <Bubble>He replied "Nice work"…</Bubble>
-        <Bubble variant="lilac">…and spent 2 months as their Graphic Design Intern on the social media team 💍</Bubble>
+        <Bubble variant="lilac">…and I spent 2 months as their Graphic Design Intern on the social media team 💍</Bubble>
+        <Button href={PALMONAS_INSTAGRAM} rel="noopener" variant="secondary" size="sm">
+          See Palmonas on Instagram ↗
+        </Button>
       </Thread>
     </section>
   )

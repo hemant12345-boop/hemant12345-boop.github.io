@@ -11,6 +11,7 @@ export const EMAIL = '50hemantmahato@gmail.com'
 export const LINKEDIN =
   'https://www.linkedin.com/in/hemant-mahato-7a328a260?utm_source=share_via&utm_content=profile&utm_medium=member_android'
 export const GITHUB = 'https://github.com/hemant12345-boop'
+export const PALMONAS_INSTAGRAM = 'https://www.instagram.com/palmonas_official/'
 
 export const MARKSHEET_AI_VIDEO = 'https://youtu.be/ivkFEzrzL7g'
 export const POSESNAP_PLAY = 'https://play.google.com/store/apps/details?id=com.posesnap.app'
